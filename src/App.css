@@ -1,0 +1,551 @@
+/* --- CYBERPUNK GLOBAL STYLES --- */
+:root {
+  /* --- UMBRELLA CYBER PALETTE --- */
+  --umb-red: #ff0033;          /* Neon Umbrella Red */
+  --umb-red-pulse: #ff3366;    /* Pulsing glow */
+  --umb-black: #000000;        /* Void black */
+  --umb-matrix: #00ff41;       /* Matrix green (for data) */
+  --umb-glitch-blue: #00f9ff;  /* HUD blue */
+  --umb-dark: #0d0d0d;         /* Carbon fiber */
+  --umb-purple: #9d00ff;       /* Cyber purple */
+  
+  /* --- FUTURISTIC EFFECTS --- */
+  --hologram-glow: 0 0 15px;
+  --scan-speed: 0.8s;
+  --neon-flicker: 0.5s;
+  --cyber-border: 1px;
+  
+  /* --- TYPOGRAPHY --- */
+  --font-main: 'Orbitron', sans-serif;
+  --font-data: 'Rajdhani', monospace;
+}
+
+/* --- Шрифты с поддержкой кириллицы --- */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Play:wght@400;700&display=swap');
+
+/* === BASE STYLES === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255,0,51,0.05) 0%, transparent 25%),
+    linear-gradient(to bottom, #000000, #0a0a0a);
+  color: var(--umb-matrix);
+  font-family: var(--font-data);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 65, 0.05),
+      rgba(0, 255, 65, 0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  pointer-events: none;
+  z-index: -1;
+  animation: scanline var(--scan-speed) linear infinite;
+}
+
+@keyframes scanline {
+  from { transform: translateY(-5px); }
+  to { transform: translateY(0); }
+}
+
+/* === HEADER === */
+header {
+  background: 
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 0, 51, 0.1),
+      transparent
+    );
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--umb-red);
+  box-shadow: 0 0 30px var(--umb-red);
+  position: relative;
+  text-align: center;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--umb-red);
+  animation: glitch-line 3s infinite;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-main);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--umb-red);
+  animation: flicker 8s infinite alternate;
+}
+
+h1 {
+  letter-spacing: 3px;
+  margin-bottom: 0.5rem;
+}
+
+/* === MAIN CONTENT === */
+main {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 80% 50%, rgba(157, 0, 255, 0.05) 0%, transparent 30%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+section {
+  background: rgba(13, 13, 13, 0.7);
+  border: 1px solid var(--umb-red);
+  box-shadow: 
+    0 0 20px var(--umb-red),
+    inset 0 0 15px rgba(255, 0, 51, 0.2);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 249, 255, 0.1),
+      transparent
+    );
+  animation: data-stream 5s infinite;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--umb-red);
+  padding-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+/* === TABLE STYLES === */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: 3rem 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255,0,51,0.1) 0%, transparent 30%),
+    linear-gradient(to bottom, #000000, #0a0a0a);
+  border: var(--cyber-border) solid var(--umb-red);
+  box-shadow: 
+    0 0 30px var(--umb-red),
+    inset 0 0 20px rgba(255,0,51,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.table-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--umb-glitch-blue);
+  animation: glitch-line 3s infinite;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--font-main);
+  background: rgba(13, 13, 13, 0.7);
+  backdrop-filter: blur(5px);
+  position: relative;
+}
+
+table::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 0, 51, 0.05),
+      transparent
+    );
+  pointer-events: none;
+  animation: data-pulse 8s infinite;
+}
+
+thead {
+  background: 
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 0, 51, 0.3),
+      transparent
+    );
+  position: relative;
+}
+
+thead::before {
+  content: "U M B R E L L A // DATA TERMINAL";
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--umb-red);
+  opacity: 0.7;
+}
+
+thead th {
+  padding: 1.2rem 1.5rem;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: var(--hologram-glow) var(--umb-red);
+  position: relative;
+  border-bottom: 1px solid var(--umb-red);
+  background: rgba(0, 0, 0, 0.6);
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+}
+
+thead th:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 15%;
+  height: 70%;
+  width: 2px;
+  background: 
+    linear-gradient(
+      to bottom,
+      transparent,
+      var(--umb-red),
+      transparent
+    );
+  animation: scanline var(--scan-speed) infinite;
+}
+
+tbody td {
+  padding: 1.2rem 1.5rem;
+  background: rgba(20, 20, 20, 0.5);
+  border-bottom: 1px solid rgba(255, 0, 51, 0.1);
+  font-family: var(--font-data);
+  font-weight: 700;
+  color: var(--umb-matrix);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+tbody td::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 255, 65, 0.03),
+      transparent
+    );
+  pointer-events: none;
+  animation: data-stream 5s infinite;
+  animation-delay: calc(var(--row-index) * 0.3s);
+}
+
+tbody tr:hover td {
+  background: rgba(255, 0, 51, 0.1);
+  color: white;
+  text-shadow: 0 0 10px var(--umb-red-pulse);
+  transform: translateX(5px);
+}
+
+/* === CYBER-BUTTONS === */
+button, .btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  font-family: var(--font-main);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  color: var(--umb-matrix);
+  border: 1px solid var(--umb-red);
+  box-shadow: 
+    0 0 10px var(--umb-red),
+    inset 0 0 5px var(--umb-red);
+  clip-path: polygon(
+    5% 0%,
+    100% 0,
+    95% 100%,
+    0% 100%
+  );
+  margin: 0.5rem;
+}
+
+button::before, .btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 200%;
+  height: 200%;
+  background: 
+    linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 0, 51, 0.3),
+      transparent
+    );
+  transform: rotate(45deg);
+  transition: all 0.6s;
+}
+
+button:hover, .btn:hover {
+  background: rgba(255, 0, 51, 0.2);
+  text-shadow: 0 0 15px var(--umb-red-pulse);
+}
+
+button:hover::before, .btn:hover::before {
+  left: 100%;
+}
+
+button:active, .btn:active {
+  transform: scale(0.95);
+}
+
+/* Alternate button style */
+.btn-alt {
+  border-color: var(--umb-glitch-blue);
+  box-shadow: 
+    0 0 10px var(--umb-glitch-blue),
+    inset 0 0 5px var(--umb-glitch-blue);
+  color: var(--umb-glitch-blue);
+}
+
+.btn-alt::before {
+  background: 
+    linear-gradient(
+      to right,
+      transparent,
+      rgba(0, 249, 255, 0.3),
+      transparent
+    );
+}
+
+.btn-alt:hover {
+  background: rgba(0, 249, 255, 0.1);
+  text-shadow: 0 0 15px var(--umb-glitch-blue);
+}
+
+/* === NEON INPUTS === */
+input, textarea, select {
+  padding: 0.8rem 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--umb-red);
+  color: var(--umb-matrix);
+  font-family: var(--font-data);
+  font-size: 1rem;
+  width: 100%;
+  transition: all 0.3s;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 0, 51, 0.2),
+    0 0 10px rgba(255, 0, 51, 0.1);
+  margin-bottom: 1rem;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--umb-glitch-blue);
+  box-shadow: 
+    inset 0 0 15px rgba(0, 249, 255, 0.3),
+    0 0 20px rgba(0, 249, 255, 0.2);
+  color: white;
+}
+
+/* === FOOTER === */
+footer {
+  background: rgba(13, 13, 13, 0.9);
+  border-top: 1px solid var(--umb-red);
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: 3rem;
+  position: relative;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: 
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--umb-red),
+      transparent
+    );
+  animation: glitch-line 3s infinite reverse;
+}
+
+/* === ANIMATIONS === */
+@keyframes glitch-line {
+  0%, 100% { opacity: 0; }
+  15%, 85% { opacity: 0.8; }
+  50% { opacity: 0.2; transform: translateX(10px); }
+}
+
+@keyframes data-pulse {
+  0% { opacity: 0; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0; }
+}
+
+@keyframes data-stream {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.3;
+  }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  body {
+    padding: 0;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  thead th {
+    padding: 1rem;
+    font-size: 0.7rem;
+  }
+  
+  tbody td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  button, .btn {
+    padding: 0.6rem 1rem;
+  }
+}
+
+/* === UTILITY CLASSES === */
+.text-center {
+  text-align: center;
+}
+
+.text-red {
+  color: var(--umb-red);
+}
+
+.text-blue {
+  color: var(--umb-glitch-blue);
+}
+
+.text-matrix {
+  color: var(--umb-matrix);
+}
+
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mt-3 { margin-top: 3rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.mb-3 { margin-bottom: 3rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: rgba(13, 13, 13, 0.7);
+  border: 1px solid var(--umb-red);
+  box-shadow: 
+    0 0 15px var(--umb-red),
+    inset 0 0 10px rgba(255, 0, 51, 0.2);
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 5px 25px var(--umb-red-pulse),
+    inset 0 0 15px rgba(255, 0, 51, 0.3);
+}
