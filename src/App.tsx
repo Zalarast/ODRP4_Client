@@ -1,5 +1,6 @@
 import React from 'react';
 import { StructureTable } from './pages';
+import "./App.css";
 
 function App() {
   return (
