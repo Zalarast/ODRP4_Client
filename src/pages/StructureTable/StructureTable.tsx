@@ -1,13 +1,17 @@
 import React from "react";
 import "./StructureTable.css";
+import { UserCard } from "../../components";
 
 interface TableRow {
     id: number,
-    departament: string,
-    nickname: string,
-    steamId: string,
     position: string,
+    departament: string,
+    nickName: string,
+    steamID32: string,
+    steamID64: number,
+    discordID: number,
     vacation: string,
+    status: string,
     addedTime: string,
     warnings: number,
     preds: number
@@ -17,91 +21,115 @@ export default function StructureTable() {
     const [data, setData] = React.useState<TableRow[]>([
         {
             id: 1,
-            departament: "Набор",
-            nickname: "Zalarast",
-            steamId: "12412",
-            position: "Администратор",
-            vacation: "Отпуск с 04.04 - 06.04",
+            departament: "Табличник",
+            nickName: "Zalarast",
+            steamID32: "4141",
+            steamID64: 2141,
+            discordID: 54353,
+            position: "Sudo-Curator",
+            vacation: "Отсутствует",
             addedTime: "12.23.4214",
-            warnings: 1,
-            preds: 3
+            warnings: 0,
+            preds: 0,
+            status: "Активен"
         },
         {
             id: 2,
-            departament: "Следющий",
-            nickname: "kaifffs",
-            steamId: "5235",
-            position: "Судо-куратор",
-            vacation: "Отсутствует",
-            addedTime: "10.05.2025",
+            departament: "Набор",
+            nickName: "Kaifffs",
+            steamID32: "4141",
+            steamID64: 2141,
+            discordID: 54353,
+            position: "Администратор",
+            vacation: "Отпуск с 04.04 - 06.04",
+            addedTime: "12.23.4214",
             warnings: 1,
-            preds: 3
+            preds: 2,
+            status: "Активен"
         },
         {
             id: 3,
-            departament: "Набор",
-            nickname: "One-Puch Man",
-            steamId: "43643",
-            position: "Асисстент",
-            vacation: "Отсутствует",
+            departament: "Все",
+            nickName: "One-Puch Man",
+            steamID32: "4141",
+            steamID64: 2141,
+            discordID: 54353,
+            position: "Curator",
+            vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
             warnings: 1,
-            preds: 3
+            preds: 1,
+            status: "Отпуск"
         },
         {
             id: 4,
-            departament: "Набор",
-            nickname: "Zalarast",
-            steamId: "12412",
-            position: "Администратор",
-            vacation: "Отпуск с 04.04 - 06.04",
+            departament: "Следящий",
+            nickName: "Gwin",
+            steamID32: "42141421",
+            steamID64: 32523634636,
+            discordID: 1241421414,
+            position: "Assistant",
+            vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
-            warnings: 1,
-            preds: 3
+            warnings: 0,
+            preds: 3,
+            status: "В замарозке"
         },
         {
-            id: 5,
+            id: 0,
             departament: "Набор",
-            nickname: "Zalarast",
-            steamId: "12412",
+            nickName: "Zalarast",
+            steamID32: "4141",
+            steamID64: 2141,
+            discordID: 54353,
             position: "Администратор",
-            vacation: "Отпуск с 04.04 - 06.04",
+            vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
-            warnings: 1,
-            preds: 3
+            warnings: 0,
+            preds: 0,
+            status: "Активен"
         },
         {
             id: 6,
             departament: "Набор",
-            nickname: "Zalarast",
-            steamId: "12412",
+            nickName: "Zalarast",
+            steamID32: "4141",
+            steamID64: 2141,
+            discordID: 54353,
             position: "Администратор",
-            vacation: "Отпуск с 04.04 - 06.04",
+            vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
-            warnings: 1,
-            preds: 3
+            warnings: 0,
+            preds: 0,
+            status: "Активен"
         },
         {
             id: 7,
             departament: "Набор",
-            nickname: "Zalarast",
-            steamId: "12412",
-            position: "Administrator",
-            vacation: "Отпуск с 04.04 - 06.04",
+            nickName: "Zalarast",
+            steamID32: "4141",
+            steamID64: 2141,
+            discordID: 54353,
+            position: "Администратор",
+            vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
-            warnings: 1,
-            preds: 3
+            warnings: 0,
+            preds: 0,
+            status: "Отпуск"
         },
         {
             id: 8,
             departament: "Набор",
-            nickname: "Zalarast",
-            steamId: "12412",
+            nickName: "Zalarast",
+            steamID32: "4141",
+            steamID64: 2141,
+            discordID: 54353,
             position: "Администратор",
-            vacation: "Отпуск с 04.04 - 06.04",
+            vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
             warnings: 1,
-            preds: 3
+            preds: 2,
+            status: "Отпуск"
         }
     ])
     const [edittingID, setEditingID] = React.useState<null | number>(null)
@@ -109,13 +137,16 @@ export default function StructureTable() {
         {
             id: 0,
             departament: "",
-            nickname: "",
-            steamId: "",
+            nickName: "",
+            steamID32: "",
+            steamID64: 0,
+            discordID: 0,
             position: "",
             vacation: "",
             addedTime: "",
             warnings: 0,
-            preds: 0
+            preds: 0,
+            status: ""
         }
     );
 
@@ -146,7 +177,7 @@ export default function StructureTable() {
 
 
     return <div>
-        <table draggable>
+        <table>
             <thead>
                 <tr>
                     <th>Отдел</th>
@@ -157,39 +188,26 @@ export default function StructureTable() {
                     <th>Дата вступления</th>
                     <th>Выговоры</th>
                     <th>Преды</th>
-                    {edittingID && <th>Действие</th>}
                 </tr>
             </thead>
             <tbody>
                 {data.map((row) => (
-                    <React.Fragment key={row.id}>
-                        {edittingID === row.id ? (<tr>
-                            <td><input onChange={(e) => handleInputChange(e, "departament")} value={editForm.departament} /></td>
-                            <td><input onChange={(e) => handleInputChange(e, "nickname")} value={editForm.nickname} /></td>
-                            <td><input onChange={(e) => handleInputChange(e, "steamId")} value={editForm.steamId} /></td>
-                            <td><input onChange={(e) => handleInputChange(e, "position")} value={editForm.position} /></td>
-                            <td><input onChange={(e) => handleInputChange(e, "vacation")} value={editForm.vacation} /></td>
-                            <td><input onChange={(e) => handleInputChange(e, "addedTime")} value={editForm.addedTime} /></td>
-                            <td><input onChange={(e) => handleInputChange(e, "warnings")} value={editForm.warnings} /></td>
-                            <td><input onChange={(e) => handleInputChange(e, "preds")} value={editForm.preds} /></td>
-                            <td>
-                                <button onClick={handleSave}>Сохранить</button>
-                                <button onClick={handleCancel}>Закрыть</button>
-                            </td>
-                        </tr>) : (<tr onClick={() => handleRowClick(row)}>
-                            <td>{row.departament}</td>
-                            <td>{row.nickname}</td>
-                            <td>{row.steamId}</td>
-                            <td>{row.position}</td>
-                            <td>{row.vacation}</td>
-                            <td>{row.addedTime}</td>
-                            <td>{row.warnings}</td>
-                            <td>{row.preds}</td>
-                            {edittingID && <td/>}
-                        </tr>)}
-                    </React.Fragment>
-                ))}
+                    <tr key={row.id} onClick={() => handleRowClick(row)}>
+                        <td>{row.departament}</td>
+                        <td>{row.nickName}</td>
+                        <td>{row.steamID32}</td>
+                        <td>{row.position}</td>
+                        <td>{row.vacation}</td>
+                        <td>{row.addedTime}</td>
+                        <td>{row.warnings}</td>
+                        <td>{row.preds}</td>
+                    </tr>)
+                )}
             </tbody>
         </table>
+
+        {edittingID && (
+            <UserCard userInfo={editForm} onClose={handleCancel} />
+        )}
     </div>
 }
