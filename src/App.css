@@ -16,12 +16,12 @@
   --cyber-border: 1px;
   
   /* --- TYPOGRAPHY --- */
-  --font-main: 'Orbitron', sans-serif;
-  --font-data: 'Rajdhani', monospace;
+  --font-main: 'Play', sans-serif;          /* Аналог Orbitron */
+  --font-data: 'Roboto Condensed', sans-serif; /* Аналог Rajdhani */
 }
 
 /* --- Шрифты с поддержкой кириллицы --- */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Play:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
 
 /* === BASE STYLES === */
 * {
@@ -283,6 +283,7 @@ tbody td {
   font-family: var(--font-data);
   font-weight: 700;
   color: var(--umb-matrix);
+  align-items: center;
   position: relative;
   transition: all 0.3s ease;
 }
