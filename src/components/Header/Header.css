@@ -1,0 +1,366 @@
+:root {
+  /* --- UMBRELLA CYBER PALETTE --- */
+  --umb-red: #ff0033;          /* Neon Umbrella Red */
+  --umb-red-pulse: #ff3366;    /* Pulsing glow */
+  --umb-black: #000000;        /* Void black */
+  --umb-matrix: #00ff41;       /* Matrix green (for data) */
+  --umb-glitch-blue: #00f9ff;  /* HUD blue */
+  --umb-dark: #0d0d0d;         /* Carbon fiber */
+  --umb-purple: #9d00ff;       /* Cyber purple */
+  
+  /* --- FUTURISTIC EFFECTS --- */
+  --hologram-glow: 0 0 15px;
+  --scan-speed: 0.8s;
+  --neon-flicker: 0.5s;
+  --cyber-border: 1px;
+  
+  /* --- TYPOGRAPHY --- */
+  --font-main: 'Orbitron', sans-serif;
+  --font-data: 'Rajdhani', monospace;
+}
+
+/* --- Шрифты с поддержкой кириллицы --- */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Play:wght@400;700&display=swap');
+
+
+
+/* === CYBER HEADER === */
+.cyber-header {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 0, 51, 0.15),
+    transparent
+  );
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--umb-red);
+  box-shadow: 0 0 30px var(--umb-red);
+  position: relative;
+  z-index: 100;
+}
+
+.cyber-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cyber-header-left {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.cyber-header-scanline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--umb-glitch-blue);
+  animation: glitch-line 3s infinite;
+}
+
+/* === CYBER SEARCH === */
+.cyber-search {
+  padding: 0.8rem 1.2rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--umb-red);
+  color: var(--umb-matrix);
+  font-family: var(--font-data);
+  font-size: 1rem;
+  min-width: 250px;
+  transition: all 0.3s;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 0, 51, 0.2),
+    0 0 10px rgba(255, 0, 51, 0.1);
+  clip-path: polygon(
+    5% 0%,
+    100% 0,
+    95% 100%,
+    0% 100%
+  );
+}
+
+.cyber-search:focus {
+  outline: none;
+  border-color: var(--umb-glitch-blue);
+  box-shadow: 
+    inset 0 0 15px rgba(0, 249, 255, 0.3),
+    0 0 20px rgba(0, 249, 255, 0.2);
+  color: white;
+}
+
+/* === CYBER BUTTONS === */
+.cyber-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  font-family: var(--font-main);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  color: var(--umb-matrix);
+  border: 1px solid var(--umb-red);
+  box-shadow: 
+    0 0 10px var(--umb-red),
+    inset 0 0 5px var(--umb-red);
+  clip-path: polygon(
+    5% 0%,
+    100% 0,
+    95% 100%,
+    0% 100%
+  );
+}
+
+.cyber-button-small {
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
+}
+
+.cyber-button-access {
+  background: rgba(255, 0, 51, 0.1);
+  animation: pulse 2s infinite alternate;
+}
+
+.cyber-button-primary {
+  border-color: var(--umb-matrix);
+  box-shadow: 
+    0 0 10px var(--umb-matrix),
+    inset 0 0 5px var(--umb-matrix);
+  color: var(--umb-matrix);
+}
+
+.cyber-button-secondary {
+  border-color: var(--umb-red);
+  box-shadow: 
+    0 0 10px var(--umb-red),
+    inset 0 0 5px var(--umb-red);
+  color: var(--umb-red);
+}
+
+.cyber-button-text {
+  position: relative;
+  z-index: 2;
+}
+
+.cyber-button:hover {
+  background: rgba(255, 0, 51, 0.2);
+  text-shadow: 0 0 15px var(--umb-red-pulse);
+}
+
+.cyber-button:hover .cyber-button-glitch {
+  opacity: 0.3;
+}
+
+.cyber-button-glitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 0, 51, 0.3),
+      transparent
+    );
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: glitch 0.5s infinite;
+}
+
+.cyber-button-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 0, 51, 0.3),
+      transparent
+    );
+  opacity: 0;
+  animation: pulse 2s infinite;
+}
+
+/* === CYBER MODAL === */
+.cyber-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s;
+}
+
+.cyber-modal {
+  position: relative;
+  background: rgba(13, 13, 13, 0.95);
+  border: 1px solid var(--umb-red);
+  box-shadow: 
+    0 0 40px var(--umb-red),
+    inset 0 0 20px rgba(255, 0, 51, 0.3);
+  padding: 2rem;
+  width: 100%;
+  max-width: 450px;
+  overflow: hidden;
+}
+
+.modal-glitch-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 65, 0.05),
+      rgba(0, 255, 65, 0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  pointer-events: none;
+  animation: scanline var(--scan-speed) linear infinite;
+}
+
+.cyber-modal-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--umb-red);
+  font-family: var(--font-main);
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px var(--umb-red-pulse);
+  position: relative;
+}
+
+.cyber-modal-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 25%;
+  width: 50%;
+  height: 1px;
+  background: var(--umb-red);
+  animation: glitch-line 3s infinite;
+}
+
+/* === CYBER FORM === */
+.cyber-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-group {
+  position: relative;
+}
+
+.cyber-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--umb-glitch-blue);
+  font-family: var(--font-data);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.cyber-input {
+  padding: 0.8rem 1rem;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--umb-red);
+  color: var(--umb-matrix);
+  font-family: var(--font-data);
+  transition: all 0.3s;
+}
+
+.cyber-input:focus {
+  outline: none;
+  border-color: var(--umb-glitch-blue);
+  box-shadow: 
+    0 0 15px var(--umb-glitch-blue),
+    inset 0 0 10px rgba(0, 249, 255, 0.2);
+}
+
+.input-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--umb-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.cyber-input:focus + .input-underline {
+  transform: scaleX(1);
+}
+
+.cyber-button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cyber-modal-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--umb-red);
+  opacity: 0.7;
+}
+
+/* === ANIMATIONS === */
+@keyframes pulse {
+  0% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.05); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes glitch {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cyber-text-flicker {
+  animation: flicker 8s infinite alternate;
+}
+
+.cyber-text-pulse {
+  animation: text-pulse 3s infinite alternate;
+}
+
+@keyframes text-pulse {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; text-shadow: 0 0 10px var(--umb-red-pulse); }
+}
