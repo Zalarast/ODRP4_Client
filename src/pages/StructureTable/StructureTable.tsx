@@ -8,13 +8,15 @@ interface TableRow {
     departament: string,
     nickName: string,
     steamID32: string,
-    steamID64: number,
-    discordID: number,
+    steamID64: string,
+    discordID: string,
     vacation: string,
     status: string,
     addedTime: string,
     warnings: number,
-    preds: number
+    preds: number;
+    linkUnion: string;
+    linkForum: string;
 }
 
 export default function StructureTable() {
@@ -23,113 +25,129 @@ export default function StructureTable() {
             id: 1,
             departament: "Табличник",
             nickName: "Zalarast",
-            steamID32: "4141",
-            steamID64: 2141,
-            discordID: 54353,
+            steamID32: "STEAM_0:1:188639659",
+            steamID64: "76561198337545047",
+            discordID: "266121340384313345",
             position: "Sudo-Curator",
             vacation: "Отсутствует",
             addedTime: "12.23.4214",
             warnings: 0,
             preds: 0,
-            status: "Активен"
+            status: "Активен",
+            linkUnion: `https://unionteams.ru/player/76561198337545047`,
+            linkForum: "https://forum.unionteams.ru/members/zalarast.1597/"
         },
         {
             id: 2,
             departament: "Набор",
             nickName: "Kaifffs",
             steamID32: "4141",
-            steamID64: 2141,
-            discordID: 54353,
+            steamID64: "2141",
+            discordID: "54353",
             position: "Администратор",
             vacation: "Отпуск с 04.04 - 06.04",
             addedTime: "12.23.4214",
             warnings: 1,
             preds: 2,
-            status: "Активен"
+            status: "Активен",
+            linkUnion: `https://unionteams.ru/player/76561198337545047`,
+            linkForum: "https://forum.unionteams.ru/members/zalarast.1597/"
         },
         {
             id: 3,
             departament: "Все",
             nickName: "One-Puch Man",
             steamID32: "4141",
-            steamID64: 2141,
-            discordID: 54353,
+            steamID64: "2141",
+            discordID: "54353",
             position: "Curator",
             vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
             warnings: 1,
             preds: 1,
-            status: "Отпуск"
+            status: "Отпуск",
+            linkUnion: `https://unionteams.ru/player/76561198337545047`,
+            linkForum: "https://forum.unionteams.ru/members/zalarast.1597/"
         },
         {
             id: 4,
             departament: "Следящий",
             nickName: "Gwin",
             steamID32: "42141421",
-            steamID64: 32523634636,
-            discordID: 1241421414,
+            steamID64: "32523634636",
+            discordID: "1241421414",
             position: "Assistant",
             vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
             warnings: 0,
             preds: 3,
-            status: "В замарозке"
+            status: "В замарозке",
+            linkUnion: `https://unionteams.ru/player/76561198337545047`,
+            linkForum: "https://forum.unionteams.ru/members/zalarast.1597/"
         },
         {
             id: 0,
             departament: "Набор",
             nickName: "Zalarast",
             steamID32: "4141",
-            steamID64: 2141,
-            discordID: 54353,
+            steamID64: "2141",
+            discordID: "54353",
             position: "Администратор",
             vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
             warnings: 0,
             preds: 0,
-            status: "Активен"
+            status: "Активен",
+            linkUnion: `https://unionteams.ru/player/76561198337545047`,
+            linkForum: "https://forum.unionteams.ru/members/zalarast.1597/"
         },
         {
             id: 6,
             departament: "Набор",
             nickName: "Zalarast",
             steamID32: "4141",
-            steamID64: 2141,
-            discordID: 54353,
+            steamID64: "2141",
+            discordID: "54353",
             position: "Администратор",
             vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
             warnings: 0,
             preds: 0,
-            status: "Активен"
+            status: "Активен",
+            linkUnion: `https://unionteams.ru/player/76561198337545047`,
+            linkForum: "https://forum.unionteams.ru/members/zalarast.1597/"
         },
         {
             id: 7,
             departament: "Набор",
             nickName: "Zalarast",
             steamID32: "4141",
-            steamID64: 2141,
-            discordID: 54353,
+            steamID64: "2141",
+            discordID: "54353",
             position: "Администратор",
             vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
             warnings: 0,
             preds: 0,
-            status: "Отпуск"
+            status: "Отпуск",
+            linkUnion: `https://unionteams.ru/player/76561198337545047`,
+            linkForum: "https://forum.unionteams.ru/members/zalarast.1597/"
         },
         {
             id: 8,
             departament: "Набор",
             nickName: "Zalarast",
             steamID32: "4141",
-            steamID64: 2141,
-            discordID: 54353,
+            steamID64: "2141",
+            discordID: "54353",
             position: "Администратор",
             vacation: "04.04 - 06.04",
             addedTime: "12.23.4214",
             warnings: 1,
             preds: 2,
-            status: "Отпуск"
+            status: "Отпуск",
+            linkUnion: `https://unionteams.ru/player/76561198337545047`,
+            linkForum: "https://forum.unionteams.ru/members/zalarast.1597/"
         }
     ])
     const [edittingID, setEditingID] = React.useState<null | number>(null)
@@ -139,14 +157,16 @@ export default function StructureTable() {
             departament: "",
             nickName: "",
             steamID32: "",
-            steamID64: 0,
-            discordID: 0,
+            steamID64: "",
+            discordID: "",
             position: "",
             vacation: "",
             addedTime: "",
             warnings: 0,
             preds: 0,
-            status: ""
+            status: "",
+            linkForum: "",
+            linkUnion: ""
         }
     );
 
