@@ -18,24 +18,22 @@
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 800px;
-  background: 
+  background:
     linear-gradient(135deg, rgba(13, 13, 13, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
   border: 1px solid var(--umb-red);
-  box-shadow: 
+  box-shadow:
     0 0 30px var(--umb-red),
     inset 0 0 20px rgba(255, 0, 51, 0.3);
   padding: 2rem;
   z-index: 101;
   font-family: var(--font-data);
   color: var(--umb-matrix);
-  clip-path: polygon(
-    0% 0%,
-    100% 0%,
-    100% 90%,
-    95% 100%,
-    5% 100%,
-    0% 90%
-  );
+  clip-path: polygon(0% 0%,
+      100% 0%,
+      100% 90%,
+      95% 100%,
+      5% 100%,
+      0% 90%);
 }
 
 .user-card::before {
@@ -45,14 +43,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    repeating-linear-gradient(
-      0deg,
+  background:
+    repeating-linear-gradient(0deg,
       rgba(0, 255, 65, 0.05),
       rgba(0, 255, 65, 0.05) 1px,
       transparent 1px,
-      transparent 5px
-    );
+      transparent 5px);
   pointer-events: none;
   z-index: -1;
 }
@@ -148,7 +144,7 @@
   padding: 1rem;
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid var(--umb-purple);
-  box-shadow: 
+  box-shadow:
     inset 0 0 10px rgba(157, 0, 255, 0.2),
     0 0 15px rgba(157, 0, 255, 0.1);
 }
@@ -167,15 +163,15 @@
   margin-bottom: 0.5rem;
 }
 
-.user-card > div:last-child {
+.user-card>div:last-child {
   margin-top: 2rem;
 }
 
-.user-card > div:last-child label {
+.user-card>div:last-child label {
   margin-bottom: 1.5rem;
 }
 
-.user-card > div:last-child div {
+.user-card>div:last-child div {
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -202,34 +198,79 @@
   box-shadow: 0 0 15px var(--umb-matrix);
 }
 
+
+.user-card label span {
+  display: flex;
+  /* Изменяем на flex-контейнер */
+  justify-content: space-between;
+  /* Распределяем пространство между элементами */
+  align-items: center;
+  /* Выравниваем по вертикали */
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(20, 20, 20, 0.7);
+  border: 1px solid rgba(255, 0, 51, 0.3);
+  color: var(--umb-matrix);
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+/* Стили для кнопки копирования */
+.copy-button {
+  background: none;
+  border: none;
+  color: var(--umb-matrix);
+  cursor: pointer;
+  padding: 0.3rem;
+  margin-left: 0.5rem;
+  transition: all 0.3s;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .user-card {
     width: 95%;
     padding: 1.5rem;
   }
-  
+
   .user-card h1 {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
     font-size: 1.5rem;
   }
-  
+
   .user-card h1 span:last-child {
     align-self: flex-end;
   }
-  
+
   .user-info-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .ticket-stats {
     flex-direction: column;
     gap: 1rem;
   }
-  
-  .user-card > div:last-child div {
+
+  .user-card>div:last-child div {
     flex-direction: column;
+  }
+
+  .copy-button:hover {
+    color: var(--umb-red);
+    transform: scale(1.1);
+  }
+
+
+  .user-card label span {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .copy-button {
+    align-self: flex-end;
+    margin-top: 0.5rem;
   }
 }
