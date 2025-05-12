@@ -1,19 +1,23 @@
 import React from "react";
 import "./UserCard.css";
-
+import { FaCopy } from '@react-icons/all-files/fa/FaCopy';
+import { FaCheck } from '@react-icons/all-files/fa/FaCheck';
+ 
 interface UserInfo {
     id: number;
     position: string;
     departament: string;
     nickName: string;
     steamID32: string;
-    steamID64: number;
-    discordID: number;
+    steamID64: string;
+    discordID: string;
     vacation: string;
     status: string;
     addedTime: string;
     warnings: number;
     preds: number;
+    linkUnion: string;
+    linkForum: string;
 }
 
 interface UserCardProps {
@@ -21,7 +25,34 @@ interface UserCardProps {
     onClose: () => void;
 }
 
+interface CopyButtonProps {
+  text: string;
+}
+
+function CopyButton({text}:CopyButtonProps) {
+    const [copied, setCopied] = React.useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            });
+    };
+
+    return (
+        <button
+            onClick={handleCopy}
+            title="Копировать"
+            className="copy-button"
+        >
+            {copied ? <FaCheck color="green" /> : <FaCopy />}
+        </button>
+    );
+}
+
 const UserCard = ({ userInfo, onClose }: UserCardProps) => {
+
     const statusClass = userInfo.status.toLowerCase() === 'активен'
         ? 'status-active'
         : 'status-inactive';
@@ -98,23 +129,26 @@ const UserCard = ({ userInfo, onClose }: UserCardProps) => {
                         STEAMID32
                         <span>
                             {userInfo.steamID32}
+                            <CopyButton text={userInfo.steamID32}/>
                         </span>
                     </label>
                     <label>
                         STEAMID64
                         <span>
                             {userInfo.steamID64}
+                            <CopyButton text={userInfo.steamID64}/>
                         </span>
                     </label>
                     <label>
                         DISCORDID
                         <span>
                             {userInfo.discordID}
+                            <CopyButton text={userInfo.discordID}/>
                         </span>
                     </label>
                     <div>
-                        <button>UNIONTEAMS</button>
-                        <button>FORUM</button>
+                        <a href={userInfo.linkUnion} target="_blank"><button>UNIONTEAMS</button></a>
+                        <a href={userInfo.linkForum} target="_blank"><button>FORUM</button></a>
                     </div>
                 </div>
             </div>
