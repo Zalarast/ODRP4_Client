@@ -2,7 +2,7 @@ import React from "react";
 import "./UserCard.css";
 import { FaCopy } from '@react-icons/all-files/fa/FaCopy';
 import { FaCheck } from '@react-icons/all-files/fa/FaCheck';
- 
+
 interface UserInfo {
     id: number;
     position: string;
@@ -26,10 +26,10 @@ interface UserCardProps {
 }
 
 interface CopyButtonProps {
-  text: string;
+    text: string;
 }
 
-function CopyButton({text}:CopyButtonProps) {
+function CopyButton({ text }: CopyButtonProps) {
     const [copied, setCopied] = React.useState(false);
 
     const handleCopy = () => {
@@ -46,7 +46,7 @@ function CopyButton({text}:CopyButtonProps) {
             title="Копировать"
             className="copy-button"
         >
-            {copied ? <FaCheck color="green" /> : <FaCopy />}
+            {copied ? <FaCheck/> : <FaCopy/>}
         </button>
     );
 }
@@ -129,21 +129,21 @@ const UserCard = ({ userInfo, onClose }: UserCardProps) => {
                         STEAMID32
                         <span>
                             {userInfo.steamID32}
-                            <CopyButton text={userInfo.steamID32}/>
+                            <CopyButton text={userInfo.steamID32} />
                         </span>
                     </label>
                     <label>
                         STEAMID64
                         <span>
                             {userInfo.steamID64}
-                            <CopyButton text={userInfo.steamID64}/>
+                            <CopyButton text={userInfo.steamID64} />
                         </span>
                     </label>
                     <label>
                         DISCORDID
                         <span>
                             {userInfo.discordID}
-                            <CopyButton text={userInfo.discordID}/>
+                            <CopyButton text={userInfo.discordID} />
                         </span>
                     </label>
                     <div>

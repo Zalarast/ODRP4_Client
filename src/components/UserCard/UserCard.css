@@ -122,6 +122,10 @@
   text-shadow: 0 0 10px var(--umb-red-pulse);
 }
 
+.user-card label span:active {
+  transform: scale(0.95);
+}
+
 .status-active {
   color: var(--umb-matrix) !important;
   text-shadow: 0 0 10px var(--umb-matrix) !important;
@@ -179,7 +183,7 @@
 }
 
 .user-card button {
-  padding: 0.8rem 1.5rem;
+  padding: 0.6rem 1.5rem;
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid var(--umb-matrix);
   color: var(--umb-matrix);
@@ -218,13 +222,8 @@
 
 /* Стили для кнопки копирования */
 .copy-button {
-  background: none;
-  border: none;
-  color: var(--umb-matrix);
-  cursor: pointer;
-  padding: 0.3rem;
-  margin-left: 0.5rem;
-  transition: all 0.3s;
+  padding: 0.4rem 1rem;
+  margin: 0;
 }
 
 /* RESPONSIVE */
