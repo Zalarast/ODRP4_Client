@@ -1,3 +1,3 @@
-import authorization from "./authorization";
+import addNewUser from "./addNewUser"
 
-export { authorization }
+export { addNewUser }
