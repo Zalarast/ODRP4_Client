@@ -1,0 +1,105 @@
+/* MessageBox.css */
+.message-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 350px; /* Фиксированная ширина */
+  padding: 1.5rem;
+  z-index: 9999; /* Очень высокий z-index чтобы было поверх всех элементов */
+  font-family: var(--font-data);
+  text-align: left;
+  background: linear-gradient(135deg, rgba(13, 13, 13, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
+  border: 1px solid;
+  box-shadow: 0 0 15px, inset 0 0 10px rgba(255, 255, 255, 0.1);
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 90%,
+    95% 100%,
+    5% 100%,
+    0% 90%
+  );
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.message-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 65, 0.05),
+    rgba(0, 255, 65, 0.05) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.message-box h2:first-child {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-right: 1.5rem; /* Чтобы текст не наезжал на кнопку закрытия */
+}
+
+.message-box h2:last-child {
+  font-size: 1rem;
+  color: var(--umb-matrix);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Стили для успешного сообщения */
+.message-box.success {
+  border-color: var(--umb-matrix);
+  box-shadow: 
+    0 0 15px var(--umb-matrix),
+    inset 0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+.message-box.success h2:first-child {
+  color: var(--umb-matrix);
+  text-shadow: 0 0 5px var(--umb-matrix);
+}
+
+/* Стили для ошибки */
+.message-box.error {
+  border-color: var(--umb-red);
+  box-shadow: 
+    0 0 15px var(--umb-red),
+    inset 0 0 10px rgba(255, 0, 51, 0.2);
+}
+
+.message-box.error h2:first-child {
+  color: var(--umb-red);
+  text-shadow: 0 0 5px var(--umb-red-pulse);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+  .message-box {
+    width: calc(100% - 40px);
+    max-width: none;
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    margin: 0 auto;
+  }
+}
