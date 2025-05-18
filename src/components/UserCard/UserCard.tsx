@@ -6,13 +6,13 @@ import { FaCheck } from '@react-icons/all-files/fa/FaCheck';
 interface UserInfo {
     id: number;
     position: string;
-    departament: string;
+    department: string;
     nickName: string;
     steamID32: string;
     steamID64: string;
     discordID: string;
     vacation: string;
-    status: string;
+    status: number;
     addedTime: string;
     warnings: number;
     preds: number;
@@ -53,7 +53,21 @@ function CopyButton({ text }: CopyButtonProps) {
 
 const UserCard = ({ userInfo, onClose }: UserCardProps) => {
 
-    const statusClass = userInfo.status.toLowerCase() === 'активен'
+    let status = "Активен";
+
+    switch(userInfo.status){
+        case 0:
+            status = "активен";
+            break;
+        case 1:
+            status = "Отпуск"
+            break;
+        case 2:
+            status = "Замарозка"
+            break;
+    }
+    
+    const statusClass = status.toLowerCase() === 'активен'
         ? 'status-active'
         : 'status-inactive';
 
@@ -69,24 +83,27 @@ const UserCard = ({ userInfo, onClose }: UserCardProps) => {
         <>
             <div className="user-card-overlay" onClick={onClose} />
             <div className="user-card">
+                
+                
                 <h1>
                     <span>{userInfo.nickName}</span>
                     <span>{userInfo.position}</span>
+                    
                 </h1>
 
                 <div className="user-info-grid">
                     <label>
                         Статус
-                        <span className={statusClass}>{userInfo.status}</span>
+                        <span className={statusClass}>{status}</span>
                     </label>
-                    {userInfo.status.toLowerCase() === 'отпуск' &&
+                    {status.toLowerCase() === 'отпуск' &&
                         <label>
                             Период отпуска
                             <span className={statusClass}>{userInfo.vacation}</span>
                         </label>
                     }
 
-                    {userInfo.status.toLowerCase() === 'в замарозке' &&
+                    {status.toLowerCase() === 'в замарозке' &&
                         <label>
                             Период замарозки
                             <span className={statusClass}>{userInfo.vacation}</span>
@@ -105,7 +122,7 @@ const UserCard = ({ userInfo, onClose }: UserCardProps) => {
 
                     <label>
                         Отдел
-                        <span>{userInfo.departament}</span>
+                        <span>{userInfo.department}</span>
                     </label>
 
                     <label>
@@ -147,8 +164,8 @@ const UserCard = ({ userInfo, onClose }: UserCardProps) => {
                         </span>
                     </label>
                     <div>
-                        <a href={userInfo.linkUnion} target="_blank"><button>UNIONTEAMS</button></a>
-                        <a href={userInfo.linkForum} target="_blank"><button>FORUM</button></a>
+                        <a href={userInfo.linkUnion} target="_blank" rel="noreferrer"><button>UNIONTEAMS</button></a>
+                        <a href={userInfo.linkForum} target="_blank" rel="noreferrer"><button>FORUM</button></a>
                     </div>
                 </div>
             </div>
