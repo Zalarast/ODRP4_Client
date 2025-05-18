@@ -1,3 +1,2 @@
-import { serverUrl } from "./severUrl";
-
-export { serverUrl }
+export * from "./severUrl";
+export * from "./cookie";
