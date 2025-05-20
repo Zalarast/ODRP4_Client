@@ -77,6 +77,7 @@
 
 .user-card h1 span:first-child {
   color: white;
+  padding-left: 2rem;
 }
 
 .user-card h1 span:last-child {
@@ -272,4 +273,20 @@
     align-self: flex-end;
     margin-top: 0.5rem;
   }
+}
+
+.user-card > div:first-child {
+  position: absolute;
+  top: 1.7rem;
+  left: .5rem;
+  z-index: 10;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s;
+}
+
+.user-card > div:first-child:hover {
+  color: var(--umb-red);
+  transform: scale(1.2);
+  text-shadow: 0 0 10px var(--umb-red-pulse);
 }

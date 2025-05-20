@@ -2,6 +2,11 @@ import React from "react";
 import "./UserCard.css";
 import { FaCopy } from '@react-icons/all-files/fa/FaCopy';
 import { FaCheck } from '@react-icons/all-files/fa/FaCheck';
+import { getUserInfo } from "../../function";
+import { IoPersonRemoveSharp } from "@react-icons/all-files/io5/IoPersonRemoveSharp";
+import { IoSettingsSharp } from "@react-icons/all-files/io5/IoSettingsSharp";
+import { FaPen } from "@react-icons/all-files/fa/FaPen";
+import { FaEdit } from "@react-icons/all-files/fa/FaEdit";
 
 interface UserInfo {
     id: number;
@@ -18,10 +23,11 @@ interface UserInfo {
     preds: number;
     linkUnion: string;
     linkForum: string;
+    vacationMSG: string;
 }
 
 interface UserCardProps {
-    userInfo: UserInfo;
+    steamID32: string;
     onClose: () => void;
 }
 
@@ -46,16 +52,34 @@ function CopyButton({ text }: CopyButtonProps) {
             title="Копировать"
             className="copy-button"
         >
-            {copied ? <FaCheck/> : <FaCopy/>}
+            {copied ? <FaCheck /> : <FaCopy />}
         </button>
     );
 }
 
-const UserCard = ({ userInfo, onClose }: UserCardProps) => {
+const UserCard = ({ steamID32, onClose }: UserCardProps) => {
+
+    const [userInfo, setUserInfo] = React.useState<UserInfo>({
+        id: 0,
+        department: "",
+        nickName: "",
+        steamID32: "",
+        steamID64: "",
+        discordID: "",
+        position: "",
+        vacation: "",
+        addedTime: "",
+        warnings: 0,
+        preds: 0,
+        status: 0,
+        linkForum: "",
+        linkUnion: "",
+        vacationMSG: ""
+    });
 
     let status = "Активен";
 
-    switch(userInfo.status){
+    switch (userInfo.status) {
         case 0:
             status = "активен";
             break;
@@ -66,7 +90,7 @@ const UserCard = ({ userInfo, onClose }: UserCardProps) => {
             status = "Замарозка"
             break;
     }
-    
+
     const statusClass = status.toLowerCase() === 'активен'
         ? 'status-active'
         : 'status-inactive';
@@ -79,16 +103,36 @@ const UserCard = ({ userInfo, onClose }: UserCardProps) => {
         ? 'warning-count'
         : '';
 
+
+    React.useEffect(() => {
+        getUserInfo(steamID32)
+            .then((res) => setUserInfo(res.data.usersData))
+            .catch((err) => console.error(err))
+    }, [])
+
     return (
         <>
             <div className="user-card-overlay" onClick={onClose} />
             <div className="user-card">
-                
-                
+                <div className="cyber-nav">
+                    <IoSettingsSharp size={25} onClick={() => console.log("Settings clicked")} />
+                    <div className="dropdown-content">
+                        <span className="menu-item">
+                            <span>Добавить админа</span>
+                        </span>
+                        <span className="menu-item">
+                            <IoPersonRemoveSharp />
+                            <span>Снять админа</span>
+                        </span>
+                        <span className="menu-item">
+                            <IoSettingsSharp />
+                            <span>Настройки</span>
+                        </span>
+                    </div>
+                </div>
                 <h1>
                     <span>{userInfo.nickName}</span>
                     <span>{userInfo.position}</span>
-                    
                 </h1>
 
                 <div className="user-info-grid">
@@ -99,14 +143,14 @@ const UserCard = ({ userInfo, onClose }: UserCardProps) => {
                     {status.toLowerCase() === 'отпуск' &&
                         <label>
                             Период отпуска
-                            <span className={statusClass}>{userInfo.vacation}</span>
+                            <span className={statusClass}>{userInfo.vacationMSG}</span>
                         </label>
                     }
 
                     {status.toLowerCase() === 'в замарозке' &&
                         <label>
                             Период замарозки
-                            <span className={statusClass}>{userInfo.vacation}</span>
+                            <span className={statusClass}>{userInfo.vacationMSG}</span>
                         </label>
                     }
 
