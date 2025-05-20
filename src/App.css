@@ -63,8 +63,9 @@ body::before {
 }
 
 @keyframes scanline {
-  from { transform: translateY(-5px); }
-  to { transform: translateY(0); }
+  0% { transform: translateY(-5px); } /* Начало: выше исходного положения */
+  50% { transform: translateY(5px); }  /* Середина: ниже исходного положения */
+  100% { transform: translateY(-5px); } /* Конец: снова вверх */
 }
 
 /* === HEADER === */
@@ -155,7 +156,7 @@ section::after {
       rgba(0, 249, 255, 0.1),
       transparent
     );
-  animation: data-stream 5s infinite;
+  animation: data-stream 7s infinite;
 }
 
 h2 {
@@ -276,8 +277,10 @@ thead th:not(:last-child)::after {
   animation: scanline var(--scan-speed) infinite;
 }
 
-tbody td {
-  padding: 1.2rem 1.5rem;
+/* 1.2rem 1.5rem */
+
+tbody td { 
+  padding: 1.2rem 4rem;
   background: rgba(20, 20, 20, 0.5);
   border-bottom: 1px solid rgba(255, 0, 51, 0.1);
   font-family: var(--font-data);
@@ -303,7 +306,7 @@ tbody td::before {
       transparent
     );
   pointer-events: none;
-  animation: data-stream 5s infinite;
+  animation: data-stream 30s infinite;
   animation-delay: calc(var(--row-index) * 0.3s);
 }
 
@@ -462,8 +465,9 @@ footer::before {
 }
 
 @keyframes data-stream {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
+  0% { transform: translateY(-100%); } /* Начало: выше */
+  50% { transform: translateY(100%); }  /* Середина: ниже */
+  100% { transform: translateY(-100%); } /* Возврат вверх */
 }
 
 @keyframes flicker {
@@ -549,4 +553,150 @@ footer::before {
   box-shadow: 
     0 5px 25px var(--umb-red-pulse),
     inset 0 0 15px rgba(255, 0, 51, 0.3);
+}
+
+/* === MOBILE FIRST ADAPTATION === */
+@media (max-width: 768px) {
+  :root {
+    --scan-speed: 1.2s;
+    --neon-flicker: 0.8s;
+    --cyber-border: 0.5px;
+  }
+
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+    background: 
+      radial-gradient(circle at 10% 20%, rgba(255,0,51,0.03) 0%, transparent 15%),
+      linear-gradient(to bottom, #000000, #0a0a0a);
+  }
+
+  body::before {
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 65, 0.03),
+        rgba(0, 255, 65, 0.03) 1px,
+        transparent 1px,
+        transparent 8px
+      );
+  }
+
+  header {
+    padding: 1rem;
+    box-shadow: 0 0 15px var(--umb-red);
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  main {
+    padding: 0.5rem;
+  }
+
+  section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 
+      0 0 10px var(--umb-red),
+      inset 0 0 8px rgba(255, 0, 51, 0.1);
+  }
+
+  /* Таблицы */
+  .table-container {
+    margin: 1rem 0;
+    box-shadow: 
+      0 0 15px var(--umb-red),
+      inset 0 0 10px rgba(255,0,51,0.2);
+  }
+
+  thead th {
+    padding: 0.6rem;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);
+  }
+
+  tbody td {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  /* Кнопки */
+  button, .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    margin: 0.3rem;
+    clip-path: polygon(3% 0%, 100% 0, 97% 100%, 0% 100%);
+  }
+
+  /* Формы */
+  input, textarea, select {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* Карточки */
+  .card {
+    padding: 1rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Анимации */
+  @keyframes scanline {
+    0% { transform: translateY(-3px); }
+    50% { transform: translateY(3px); }
+    100% { transform: translateY(-3px); }
+  }
+
+  /* Утилиты */
+  .mt-1 { margin-top: 0.5rem; }
+  .mt-2 { margin-top: 1rem; }
+  .mt-3 { margin-top: 1.5rem; }
+  .mb-1 { margin-bottom: 0.5rem; }
+  .mb-2 { margin-bottom: 1rem; }
+  .mb-3 { margin-bottom: 1.5rem; }
+}
+
+/* === Дополнительные адаптации для очень маленьких экранов === */
+@media (max-width: 480px) {
+  :root {
+    --hologram-glow: 0 0 8px;
+  }
+
+  header {
+    padding: 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  section {
+    padding: 0.8rem;
+  }
+
+  thead th {
+    padding: 0.4rem;
+    font-size: 0.5rem;
+  }
+
+  tbody td {
+    padding: 0.4rem;
+  }
+
+  button, .btn {
+    padding: 0.4rem 0.8rem;
+  }
 }
