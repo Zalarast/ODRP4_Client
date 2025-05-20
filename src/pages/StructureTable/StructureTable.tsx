@@ -18,6 +18,7 @@ interface StructureTableProps {
         preds: number;
         linkUnion: string;
         linkForum: string;
+        vacationMSG:string;
     }] | []
 }
 
@@ -36,32 +37,14 @@ interface TableRow {
     preds: number;
     linkUnion: string;
     linkForum: string;
+    vacationMSG:string;
 }
 
 export default function StructureTable({ data }: StructureTableProps) {
-    const [edittingID, setEditingID] = React.useState<null | number>(null)
-    const [editForm, setEditForm] = React.useState(
-        {
-            id: 0,
-            department: "",
-            nickName: "",
-            steamID32: "",
-            steamID64: "",
-            discordID: "",
-            position: "",
-            vacation: "",
-            addedTime: "",
-            warnings: 0,
-            preds: 0,
-            status: 0,
-            linkForum: "",
-            linkUnion: ""
-        }
-    );
+    const [userID, setUserID] = React.useState("");
 
     const handleRowClick = (row: TableRow) => {
-        setEditingID(row.id)
-        setEditForm(row)
+        setUserID(row.steamID32)
     }
 
     // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: keyof TableRow) => {
@@ -80,42 +63,45 @@ export default function StructureTable({ data }: StructureTableProps) {
     // };
 
     const handleCancel = () => {
-        setEditingID(null);
+        setUserID("");
     };
 
 
-    return <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Отдел</th>
-                    <th>Никнейм</th>
-                    <th>SteamID32</th>
-                    <th>Должность</th>
-                    <th>Отпуск</th>
-                    <th>Дата вступления</th>
-                    <th>Выговоры</th>
-                    <th>Преды</th>
-                </tr>
-            </thead>
-            <tbody>
-                {data.map((row) => (
-                    <tr key={row.id} onClick={() => handleRowClick(row)}>
-                        <td>{row.department}</td>
-                        <td>{row.nickName}</td>
-                        <td>{row.steamID32}</td>
-                        <td>{row.position}</td>
-                        <td>{row.vacation}</td>
-                        <td>{row.addedTime}</td>
-                        <td>{row.warnings}</td>
-                        <td>{row.preds}</td>
-                    </tr>)
-                )}
-            </tbody>
-        </table>
 
-        {edittingID && (
-            <UserCard userInfo={editForm} onClose={handleCancel} />
-        )}
-    </div>
+    return (
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Отдел</th>
+                        <th>Никнейм</th>
+                        <th>SteamID32</th>
+                        <th>Должность</th>
+                        <th>Статус</th>
+                        <th>Вступление</th>
+                        <th>Выговоры</th>
+                        <th>Преды</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((row) => (
+                        <tr key={row.id} onClick={() => handleRowClick(row)}>
+                            <td>{row.department}</td>
+                            <td>{row.nickName}</td>
+                            <td>{row.steamID32}</td>
+                            <td>{row.position}</td>
+                            <td>{(row.status === 0) ? ("Активен") : ((row.status === 1) ? ("В отпуске") : ("В замарозке"))}</td>
+                            <td>{row.addedTime}</td>
+                            <td>{row.warnings}</td>
+                            <td>{row.preds}</td>
+                        </tr>)
+                    )}
+                </tbody>
+            </table>
+
+            {userID && (
+                <UserCard steamID32={userID} onClose={handleCancel} />
+            )}
+        </div>
+    )
 }
