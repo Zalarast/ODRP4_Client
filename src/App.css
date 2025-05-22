@@ -555,20 +555,25 @@ footer::before {
     inset 0 0 15px rgba(255, 0, 51, 0.3);
 }
 
-/* === MOBILE FIRST ADAPTATION === */
+/* === MOBILE OPTIMIZED CYBERPUNK STYLES === */
 @media (max-width: 768px) {
   :root {
-    --scan-speed: 1.2s;
-    --neon-flicker: 0.8s;
+    /* Оптимизированные переменные для мобильных */
+    --hologram-glow: 0 0 8px;
+    --scan-speed: 1.5s;
+    --neon-flicker: 1s;
     --cyber-border: 0.5px;
   }
 
+  /* Базовые стили */
   body {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.5;
     background: 
-      radial-gradient(circle at 10% 20%, rgba(255,0,51,0.03) 0%, transparent 15%),
+      radial-gradient(circle at 15% 25%, rgba(255,0,51,0.03) 0%, transparent 20%),
       linear-gradient(to bottom, #000000, #0a0a0a);
+    padding: 0;
+    overflow-x: hidden;
   }
 
   body::before {
@@ -577,126 +582,226 @@ footer::before {
         0deg,
         rgba(0, 255, 65, 0.03),
         rgba(0, 255, 65, 0.03) 1px,
-        transparent 1px,
-        transparent 8px
+        transparent 2px,
+        transparent 6px
       );
+    animation: scanline 2s linear infinite;
   }
 
+  /* Упрощенная анимация для производительности */
+  @keyframes scanline {
+    0%, 100% { transform: translateY(-2px); opacity: 0.8; }
+    50% { transform: translateY(2px); opacity: 0.5; }
+  }
+
+  /* Заголовок */
   header {
-    padding: 1rem;
-    box-shadow: 0 0 15px var(--umb-red);
+    padding: 1rem 0.5rem;
+    box-shadow: 0 0 10px var(--umb-red);
+    position: relative;
+    z-index: 10;
+  }
+
+  header::after {
+    height: 1px;
+    animation: none;
+    background: linear-gradient(90deg, transparent, var(--umb-red), transparent);
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+    animation: none;
+    text-shadow: 0 0 5px var(--umb-red);
   }
 
   h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
   }
 
+  /* Основное содержимое */
   main {
     padding: 0.5rem;
+    width: 100%;
+    max-width: 100%;
   }
 
   section {
     padding: 1rem;
     margin-bottom: 1rem;
     box-shadow: 
-      0 0 10px var(--umb-red),
-      inset 0 0 8px rgba(255, 0, 51, 0.1);
+      0 0 8px var(--umb-red),
+      inset 0 0 5px rgba(255, 0, 51, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  section::after {
+    animation: none;
+    display: none;
   }
 
   /* Таблицы */
   .table-container {
     margin: 1rem 0;
     box-shadow: 
-      0 0 15px var(--umb-red),
-      inset 0 0 10px rgba(255,0,51,0.2);
+      0 0 8px var(--umb-red),
+      inset 0 0 5px rgba(255,0,51,0.1);
+    border: none;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-container::before {
+    height: 1px;
+    animation: none;
+  }
+
+  table {
+    min-width: 600px; /* Для горизонтального скролла */
+    font-size: 0.8rem;
   }
 
   thead th {
-    padding: 0.6rem;
+    padding: 0.5rem;
     font-size: 0.6rem;
     letter-spacing: 1px;
-    clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);
+    clip-path: none;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  thead th:not(:last-child)::after {
+    display: none;
   }
 
   tbody td {
-    padding: 0.6rem;
-    font-size: 0.8rem;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  tbody tr:hover td {
+    transform: none;
   }
 
   /* Кнопки */
   button, .btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.7rem;
-    margin: 0.3rem;
-    clip-path: polygon(3% 0%, 100% 0, 97% 100%, 0% 100%);
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+    margin: 0.2rem;
+    clip-path: none;
+    border-radius: 2px;
+    box-shadow: 
+      0 0 5px var(--umb-red),
+      inset 0 0 3px var(--umb-red);
+  }
+
+  button::before, .btn::before {
+    display: none;
   }
 
   /* Формы */
   input, textarea, select {
-    padding: 0.6rem 0.8rem;
+    padding: 0.7rem;
     font-size: 0.9rem;
+    box-shadow: 
+      inset 0 0 5px rgba(255, 0, 51, 0.1),
+      0 0 5px rgba(255, 0, 51, 0.1);
   }
 
   /* Карточки */
   .card {
     padding: 1rem;
+    margin: 0.5rem 0;
+    box-shadow: 
+      0 0 8px var(--umb-red),
+      inset 0 0 5px rgba(255, 0, 51, 0.1);
   }
 
+  .card:hover {
+    transform: none;
+    box-shadow: 
+      0 0 10px var(--umb-red),
+      inset 0 0 8px rgba(255, 0, 51, 0.2);
+  }
+
+  /* Сетка */
   .grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.8rem;
   }
 
-  /* Анимации */
-  @keyframes scanline {
-    0% { transform: translateY(-3px); }
-    50% { transform: translateY(3px); }
-    100% { transform: translateY(-3px); }
+  /* Футер */
+  footer {
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  footer::before {
+    animation: none;
   }
 
   /* Утилиты */
   .mt-1 { margin-top: 0.5rem; }
   .mt-2 { margin-top: 1rem; }
-  .mt-3 { margin-top: 1.5rem; }
+  .mt-3 { margin-top: 1.2rem; }
   .mb-1 { margin-bottom: 0.5rem; }
   .mb-2 { margin-bottom: 1rem; }
-  .mb-3 { margin-bottom: 1.5rem; }
-}
+  .mb-3 { margin-bottom: 1.2rem; }
 
-/* === Дополнительные адаптации для очень маленьких экранов === */
-@media (max-width: 480px) {
-  :root {
-    --hologram-glow: 0 0 8px;
+  /* Оптимизированные анимации */
+  @keyframes glitch-line {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
   }
 
-  header {
-    padding: 0.8rem;
+  @keyframes data-pulse {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.2; }
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.9; }
+  }
+}
+
+/* === Адаптация для очень маленьких экранов (до 400px) === */
+@media (max-width: 400px) {
+  :root {
+    --scan-speed: 2s;
+  }
+
+  body {
+    font-size: 14px;
   }
 
   h1 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
-  section {
-    padding: 0.8rem;
+  h2 {
+    font-size: 1rem;
+  }
+
+  button, .btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  .table-container {
+    margin: 0.5rem 0;
   }
 
   thead th {
     padding: 0.4rem;
-    font-size: 0.5rem;
+    font-size: 0.55rem;
   }
 
   tbody td {
     padding: 0.4rem;
-  }
-
-  button, .btn {
-    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
   }
 }
