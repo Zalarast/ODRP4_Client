@@ -47,7 +47,7 @@ function App() {
   return (
     <div className="App">
       <Header setMsgActive={setMsgActive} setMsgCode={setMsgCode} setMsgMessage={setMsgMessage} logined={logined} setLogined={() => setLogined(true)} userInfo={userInfo} setUserInfo={setUserInfo} setSearchNicname={setSearchNickName} updateUsersData={updateUsersData} />
-      <StructureTable data={usersData} />
+      <StructureTable data={usersData} logined={logined}/>
       {msgActive && <MessageBox code={msgCode} message={msgMessage} />}
     </div>
   );
