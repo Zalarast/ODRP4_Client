@@ -20,6 +20,7 @@ interface StructureTableProps {
         linkForum: string;
         vacationMSG:string;
     }] | []
+    logined: boolean
 }
 
 interface TableRow {
@@ -40,7 +41,7 @@ interface TableRow {
     vacationMSG:string;
 }
 
-export default function StructureTable({ data }: StructureTableProps) {
+export default function StructureTable({ data, logined }: StructureTableProps) {
     const [userID, setUserID] = React.useState("");
 
     const handleRowClick = (row: TableRow) => {
@@ -100,7 +101,7 @@ export default function StructureTable({ data }: StructureTableProps) {
             </table>
 
             {userID && (
-                <UserCard steamID32={userID} onClose={handleCancel} />
+                <UserCard steamID32={userID} onClose={handleCancel} logined={logined}/>
             )}
         </div>
     )

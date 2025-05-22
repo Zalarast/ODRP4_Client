@@ -6,7 +6,6 @@ import { getUserInfo } from "../../function";
 import { IoPersonRemoveSharp } from "@react-icons/all-files/io5/IoPersonRemoveSharp";
 import { IoSettingsSharp } from "@react-icons/all-files/io5/IoSettingsSharp";
 import { FaPen } from "@react-icons/all-files/fa/FaPen";
-import { FaEdit } from "@react-icons/all-files/fa/FaEdit";
 
 interface UserInfo {
     id: number;
@@ -29,13 +28,16 @@ interface UserInfo {
 interface UserCardProps {
     steamID32: string;
     onClose: () => void;
+    logined: boolean;
 }
 
 interface CopyButtonProps {
     text: string;
+    logined: boolean;
+    setEditable: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function CopyButton({ text }: CopyButtonProps) {
+function CopyButton({ text, logined, setEditable }: CopyButtonProps) {
     const [copied, setCopied] = React.useState(false);
 
     const handleCopy = () => {
@@ -47,18 +49,26 @@ function CopyButton({ text }: CopyButtonProps) {
     };
 
     return (
-        <button
-            onClick={handleCopy}
-            title="Копировать"
-            className="copy-button"
-        >
-            {copied ? <FaCheck /> : <FaCopy />}
-        </button>
+        <div>
+            <button
+                onClick={handleCopy}
+                title="Копировать"
+                className="copy-button"
+            >
+                {copied ? <FaCheck /> : <FaCopy />}
+            </button>
+            {logined && <button onClick={()=>setEditable(true)}
+            title="Изменить"
+                className="copy-button">
+                <FaPen />
+            </button>}
+        </div>
     );
 }
 
-const UserCard = ({ steamID32, onClose }: UserCardProps) => {
+const UserCard = ({ steamID32, onClose, logined }: UserCardProps) => {
 
+    const [edited, setEdited] = React.useState(false);
     const [userInfo, setUserInfo] = React.useState<UserInfo>({
         id: 0,
         department: "",
@@ -118,15 +128,16 @@ const UserCard = ({ steamID32, onClose }: UserCardProps) => {
                     <IoSettingsSharp size={25} onClick={() => console.log("Settings clicked")} />
                     <div className="dropdown-content">
                         <span className="menu-item">
-                            <span>Добавить админа</span>
+                            <span>Изменить статус</span>
                         </span>
                         <span className="menu-item">
-                            <IoPersonRemoveSharp />
+                            <span>Выдать наказание</span>
+                        </span>
+                        <span className="menu-item">
+                            <span>Снять наказание</span>
+                        </span>
+                        <span className="menu-item del">
                             <span>Снять админа</span>
-                        </span>
-                        <span className="menu-item">
-                            <IoSettingsSharp />
-                            <span>Настройки</span>
                         </span>
                     </div>
                 </div>
@@ -185,33 +196,53 @@ const UserCard = ({ steamID32, onClose }: UserCardProps) => {
                         Выполнено
                     </div>
                 </div>
-                <div>
+                {edited ? <div>
+                    <label>
+                        STEAMID32
+                        <input value={userInfo.steamID32}>
+                        </input>
+                    </label>
+                    <label>
+                        STEAMID64
+                        <input value={userInfo.steamID64}>
+                        </input>
+                    </label>
+                    <label>
+                        DISCORDID
+                        <input value={userInfo.discordID}>
+                        </input>
+                    </label>
+                    <div>
+                        <a href={userInfo.linkUnion} target="_blank" rel="noreferrer"><button>UNIONTEAMS</button></a>
+                        <a href={userInfo.linkForum} target="_blank" rel="noreferrer"><button>FORUM</button></a>
+                    </div>
+                </div> : <div>
                     <label>
                         STEAMID32
                         <span>
                             {userInfo.steamID32}
-                            <CopyButton text={userInfo.steamID32} />
+                            <CopyButton text={userInfo.steamID32} logined={logined} setEditable={setEdited}/>
                         </span>
                     </label>
                     <label>
                         STEAMID64
                         <span>
                             {userInfo.steamID64}
-                            <CopyButton text={userInfo.steamID64} />
+                            <CopyButton text={userInfo.steamID64} logined={logined} setEditable={setEdited}/>
                         </span>
                     </label>
                     <label>
                         DISCORDID
                         <span>
                             {userInfo.discordID}
-                            <CopyButton text={userInfo.discordID} />
+                            <CopyButton text={userInfo.discordID} logined={logined} setEditable={setEdited}/>
                         </span>
                     </label>
                     <div>
                         <a href={userInfo.linkUnion} target="_blank" rel="noreferrer"><button>UNIONTEAMS</button></a>
                         <a href={userInfo.linkForum} target="_blank" rel="noreferrer"><button>FORUM</button></a>
                     </div>
-                </div>
+                </div>}
             </div>
         </>
     );
