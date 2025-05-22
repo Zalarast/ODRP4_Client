@@ -48,7 +48,7 @@ export default function Header(HeaderProps: HeaderProps) {
         </button> : <ProfileMenu />}
     </div>
 
-    {showNewUserForm && <NewUserForm setMsgActive={HeaderProps.setMsgActive} setMsgCode={HeaderProps.setMsgCode} setMsgMessage={HeaderProps.setMsgMessage} onClose={() => setShowNewUserForm(false)} updateUsersData={HeaderProps.updateUsersData} />}
+    {showNewUserForm && <NewUserForm setMsgActive={HeaderProps.setMsgActive} setMsgCode={HeaderProps.setMsgCode} setMsgMessage={HeaderProps.setMsgMessage} onClose={() => setShowNewUserForm(false)} updateUsersData={HeaderProps.updateUsersData}/>}
     {showLogin && <Login setMsgActive={HeaderProps.setMsgActive} setMsgCode={HeaderProps.setMsgCode} setMsgMessage={HeaderProps.setMsgMessage} onClose={() => setShowLogin(false)} setLogined={HeaderProps.setLogined} setUserInfo={HeaderProps.setUserInfo} />}
 
     <div className="cyber-header-scanline"></div>
