@@ -6,7 +6,7 @@ interface newUserData {
     steamID32: string,
     steamID64: string,
     discordID: string,
-    position: string,
+    rank: string,
     department: string,
     unionTeamsLink: string,
     forumLink: string,
@@ -21,12 +21,11 @@ export default async function addNewUser(newUserData: newUserData): Promise<{
         url: serverUrl() + "/newUser",
         data: { token: getCookie("UID"), newUserData: newUserData },
         method: "POST",
-    }).then((res) => {
-        if (res.data.result) {
-            return { code: true, msg: "Пользователь успешно добавлен" };
-        } else {
-            return { code: false, msg: "Ошибка при добавлении" };
+        headers: {
+            "Authorization": `Bearer ${getCookie("UID")}`
         }
+    }).then((res) => {
+        return { code: res.data.result, msg: res.data.msg }
     }).catch((err) => {
         console.error(err)
         return { code: false, msg: "Ошибка со связью с сервером" };
