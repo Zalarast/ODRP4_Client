@@ -11,17 +11,18 @@ interface NewUserFormProps {
   updateUsersData: () => void
 }
 
-export default function NewUserForm (props: NewUserFormProps) {
+export default function NewUserForm(props: NewUserFormProps) {
   const [formData, setFormData] = React.useState({
     nickName: '',
     steamID32: '',
     steamID64: '',
     discordID: '',
-    position: 'Curator',
+    rank: '1',
     department: 'Все',
     unionTeamsLink: '',
     forumLink: '',
-    probation: false
+    probation: false,
+    RankId: 1
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,8 +58,10 @@ export default function NewUserForm (props: NewUserFormProps) {
         props.setMsgActive(true)
         props.setMsgCode((res.code ? 0 : 1))
         props.setMsgMessage(res.msg);
-        props.onClose();
-        props.updateUsersData();
+        if (res.code) {
+          props.onClose();
+          props.updateUsersData();
+        }
       })
   }
 
@@ -152,19 +155,19 @@ export default function NewUserForm (props: NewUserFormProps) {
                 <label>
                   <span className="umbrella-label">Должность</span>
                   <select
-                    name="position"
-                    value={formData.position}
+                    name="RankId"
+                    value={formData.RankId}
                     onChange={handleChangeSelect}
                     className="umbrella-select"
                   >
-                    <option value="Curator">Curator</option>
-                    <option value="Sudo-Curator">Sudo-Curator</option>
-                    <option value="Asisstant">Asisstant</option>
-                    <option value="Senior_Admin">Senior_Admin</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Operator">Operator</option>
-                    <option value="Moderator">Moderator</option>
-                    <option value="Intern">Intern</option>
+                    <option value={1}>Curator</option>
+                    <option value={2}>Sudo-Curator</option>
+                    <option value={3}>Asisstant</option>
+                    <option value={4}>Senior_Admin</option>
+                    <option value={5}>Admin</option>
+                    <option value={6}>Operator</option>
+                    <option value={7}>Moderator</option>
+                    <option value={8}>Intern</option>
                   </select>
                   <span className="input-border"></span>
                 </label>
