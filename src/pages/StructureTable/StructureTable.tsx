@@ -5,7 +5,6 @@ import { UserCard } from "../../components";
 interface StructureTableProps {
     data: [{
         id: number,
-        position: string,
         department: string,
         nickName: string,
         steamID32: string,
@@ -19,13 +18,15 @@ interface StructureTableProps {
         linkUnion: string;
         linkForum: string;
         vacationMSG:string;
+        Rank: {
+        rank_name: string
+    }
     }] | []
     logined: boolean
 }
 
 interface TableRow {
     id: number,
-    position: string,
     department: string,
     nickName: string,
     steamID32: string,
@@ -39,6 +40,9 @@ interface TableRow {
     linkUnion: string;
     linkForum: string;
     vacationMSG:string;
+    Rank: {
+        rank_name: string
+    }
 }
 
 export default function StructureTable({ data, logined }: StructureTableProps) {
@@ -90,7 +94,7 @@ export default function StructureTable({ data, logined }: StructureTableProps) {
                             <td>{row.department}</td>
                             <td>{row.nickName}</td>
                             <td>{row.steamID32}</td>
-                            <td>{row.position}</td>
+                            <td>{row.Rank.rank_name}</td>
                             <td>{(row.status === 0) ? ("Активен") : ((row.status === 1) ? ("В отпуске") : ("В замарозке"))}</td>
                             <td>{row.addedTime}</td>
                             <td>{row.warnings}</td>
