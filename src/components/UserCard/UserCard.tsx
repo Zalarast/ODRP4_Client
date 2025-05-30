@@ -8,21 +8,23 @@ import { IoSettingsSharp } from "@react-icons/all-files/io5/IoSettingsSharp";
 import { FaPen } from "@react-icons/all-files/fa/FaPen";
 
 interface UserInfo {
-    id: number;
-    position: string;
-    department: string;
-    nickName: string;
-    steamID32: string;
-    steamID64: string;
-    discordID: string;
-    vacation: string;
-    status: number;
-    addedTime: string;
-    warnings: number;
+    id: number,
+    department: string,
+    nickName: string,
+    steamID32: string,
+    steamID64: string,
+    discordID: string,
+    vacation: string,
+    status: number,
+    addedTime: string,
+    warnings: number,
     preds: number;
     linkUnion: string;
     linkForum: string;
     vacationMSG: string;
+    Rank: {
+        rank_name: string
+    }
 }
 
 interface UserCardProps {
@@ -57,8 +59,8 @@ function CopyButton({ text, logined, setEditable }: CopyButtonProps) {
             >
                 {copied ? <FaCheck /> : <FaCopy />}
             </button>
-            {logined && <button onClick={()=>setEditable(true)}
-            title="Изменить"
+            {logined && <button onClick={() => setEditable(true)}
+                title="Изменить"
                 className="copy-button">
                 <FaPen />
             </button>}
@@ -76,7 +78,6 @@ const UserCard = ({ steamID32, onClose, logined }: UserCardProps) => {
         steamID32: "",
         steamID64: "",
         discordID: "",
-        position: "",
         vacation: "",
         addedTime: "",
         warnings: 0,
@@ -84,7 +85,10 @@ const UserCard = ({ steamID32, onClose, logined }: UserCardProps) => {
         status: 0,
         linkForum: "",
         linkUnion: "",
-        vacationMSG: ""
+        vacationMSG: "",
+        Rank: {
+            rank_name: ""
+        }
     });
 
     let status = "Активен";
@@ -143,7 +147,7 @@ const UserCard = ({ steamID32, onClose, logined }: UserCardProps) => {
                 </div>
                 <h1>
                     <span>{userInfo.nickName}</span>
-                    <span>{userInfo.position}</span>
+                    <span>{userInfo.Rank.rank_name}</span>
                 </h1>
 
                 <div className="user-info-grid">
@@ -221,21 +225,21 @@ const UserCard = ({ steamID32, onClose, logined }: UserCardProps) => {
                         STEAMID32
                         <span>
                             {userInfo.steamID32}
-                            <CopyButton text={userInfo.steamID32} logined={logined} setEditable={setEdited}/>
+                            <CopyButton text={userInfo.steamID32} logined={logined} setEditable={setEdited} />
                         </span>
                     </label>
                     <label>
                         STEAMID64
                         <span>
                             {userInfo.steamID64}
-                            <CopyButton text={userInfo.steamID64} logined={logined} setEditable={setEdited}/>
+                            <CopyButton text={userInfo.steamID64} logined={logined} setEditable={setEdited} />
                         </span>
                     </label>
                     <label>
                         DISCORDID
                         <span>
                             {userInfo.discordID}
-                            <CopyButton text={userInfo.discordID} logined={logined} setEditable={setEdited}/>
+                            <CopyButton text={userInfo.discordID} logined={logined} setEditable={setEdited} />
                         </span>
                     </label>
                     <div>
